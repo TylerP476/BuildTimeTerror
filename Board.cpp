@@ -1,6 +1,7 @@
 #include<iostream>
 #include<ctime>
 #include<cstdlib>
+#include<stdlib.h>
 using namespace std;
 //Variables for game
 bool running = true;
@@ -23,12 +24,16 @@ void TakeTurnP2();
 void CheckPosP1();
 void CheckPosP2();
 void MainBoard();
+void SnakesText();
 
 
 
 //Main Menu
 int main()
 {
+	SnakesText();
+	system("pause>nul");
+	system("CLS");
 	MenuDisplay();
 	SnakeArt();
 	MenuToggle();
@@ -298,7 +303,7 @@ void MainBoard() {
 
 	} while (running);
 
-}
+} 
 
 
 #pragma region Menu Word Art
@@ -368,3 +373,30 @@ void SnakeArt()
 	cout << "\t\t<_0_0_0_0_0_0_0_0_0_0_0_0____/   \\" << "\t\t       <%%%%%%%%%%%%%%%%%%%%%%%%_____/   \\" << endl;
 }
 #pragma endregion
+
+void SnakesText() {
+	cout << "   ___    _    _      __      _    _   _____    ___  \n";
+	cout << "  /   \\  | \\  | |    /  \\    | |  / / |  ___|  /   \\ \n";
+	cout << " |  /\\_| |  \\ | |   / /\\ \\   | | / /  | |     |  /\\_| \n";
+	cout << "  \\_\\_   |   \\| |  / /__\\ \\  | |/ /\   | |__    \\_\\_  \n";
+	cout << "  _ \\ \\  | |\\   | |  ____  | | |\\ \\   |  __|   _ \\ \\ \n";
+	cout << " | \\/  | | | \\  | | |    | | | | \\ \\  | |___  | \\/  | \n";
+	cout << "  \\___/  |_|  \\_| |_|    |_| |_|  \\_\\ |_____|  \\___/  \n";
+	cout << "                                        ____ \n";
+	cout << "                                       / __ \\\n";
+	cout << "                                      | /  \\ | \n";
+	cout << "                                      | \\__/ |  \n";
+	cout << "                                       \\    /   _\n";
+	cout << "                                       / __ \\  / /\n";
+	cout << "                                      | /  \\ \\/ /\n";
+	cout << "                                      | \\__/ /\\ \\\n";
+	cout << "                                       \\____/  \\_\\\n";
+	cout << "                                 _           __      ____     ____     _____   _____     ___ \n";
+	cout << "                                | |         /  \\    |  _ \\   |  _ \\   |  ___| |  __ \\   /   \\     \n";
+	cout << "                                | |        / /\\ \\   | | \\ \\  | | \\ \\  | |     | |  \\ | |  /\\_|                  \n";
+	cout << "                                | |       / /__\\ \\  | |  | | | |  | | | |__   | |__/ |  \\_\\_             \n";
+	cout << "                                | |      |  ____  | | |  | | | |  | | |  __|  |    _/   _ \\ \\        \n";
+	cout << "                                | |____  | |    | | | |_/ /  | |_/ /  | |___  | |\\ \\   | \\/  |              \n";
+	cout << "                                |______| |_|    |_| |____/   |____/   |_____| |_| \\_\\   \\___/                \n";
+
+}
