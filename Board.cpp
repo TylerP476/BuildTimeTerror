@@ -2,6 +2,7 @@
 #include<ctime>
 #include<cstdlib>
 #include<stdlib.h>
+#include "windows.h"
 using namespace std;
 //Variables for game
 bool running = true;
@@ -12,8 +13,9 @@ char board[100];
 double num;
 bool valid = false;
 bool goBack = false;
+bool firstLaunch = true;
 double input;
-int winner;
+string winner;
 
 
 void MenuDisplay();
@@ -25,13 +27,19 @@ void CheckPosP1();
 void CheckPosP2();
 void MainBoard();
 void SnakesText();
+void Reset();
+void WinScreen();
+void VictoryText();
 
 
 
 //Main Menu
 int main()
 {
-	SnakesText();
+	if (firstLaunch) {
+		SnakesText();
+		firstLaunch = false;
+	}
 	system("pause>nul");
 	system("CLS");
 	MenuDisplay();
@@ -85,6 +93,7 @@ int main()
 		//Switches to the corresponding screen that the player has inputted
 		if (num == 1)
 		{
+			running = true;
 			MainBoard();
 		}
 		else if (num == 2)
@@ -103,8 +112,8 @@ int main()
 				cout << "\t\t\t\t1. Decide who goes first" << endl;
 				cout << "\n\t\t\t\t2. Take turns rolling the dice by pressing ENTER" << endl;
 				cout << "\n\t\t\t\t3. Your player piece will move accordingly to the dice roll around the board" << endl;
-				cout << "\n\t\t\t\t4. If your player piece lands at the bottom of a ladder, it moves " << "\n\t\t\t\tto the top of the ladder" << endl;
-				cout << "\n\t\t\t\t5. If your player piece lands on the head of the snake, it slides " << "\n\t\t\t\tdown to the bottom of the snake" << endl;
+				cout << "\n\t\t\t\t4. If your player piece lands on a tile that says laddr on top and " << "\n\t\t\t\tbelow, you move to the tile denoted by the numbers beside your piece " << endl;
+				cout << "\n\t\t\t\t5. If your player piece lands on a tile that says snake on top and " << "\n\t\t\t\tbelow, you move to the tile denoted by the numbers beside your piece" << endl;
 				cout << "\n\t\t\t\t6. The first player to reach the end of the board is the winner!" << endl;
 				cout << "\n\n\n\n\t\t\t\t\t\t   [Press 4 to go back]" << endl;
 				cout << "\t\t\t\t\t\t\t    ";
@@ -185,9 +194,10 @@ void TakeTurnP2() {
 void CheckPosP1() {
 	//Check if the player won
 	if (playerOnePos >= 100) {
-		winner = 1;//Variable for denoting who the winner is in end screen
-		cout << "Player One Wins! Congratz!";
-		running = false;
+		winner = "One";//Variable for denoting who the winner is in end screen
+		WinScreen();
+		Reset();
+		main();
 	}
 	//switch statement that compares the player position to each ladder and snake to determine if they should move
 	//to add a snake or ladder, just add the case for where it starts, and set the player pos to where it ends
@@ -210,6 +220,66 @@ void CheckPosP1() {
 		playerOnePos = 6;
 		system("Pause>nul");
 		break;
+	case 21:
+		cout << "Player One has landed on a LADDER and moved to tile 42!" << endl;
+		cout << endl;
+		playerOnePos = 42;
+		system("Pause>nul");
+		break;
+	case 36:
+		cout << "Player One has landed on a LADDER and moved to tile 44!" << endl;
+		cout << endl;
+		playerOnePos = 44;
+		system("Pause>nul");
+		break;
+	case 47:
+		cout << "Player One has landed on a SNAKE and moved to tile 26!" << endl;
+		cout << endl;
+		playerOnePos = 26;
+		system("Pause>nul");
+		break;
+	case 51:
+		cout << "Player One has landed on a LADDER and moved to tile 67!" << endl;
+		cout << endl;
+		playerOnePos = 67;
+		system("Pause>nul");
+		break;
+	case 56:
+		cout << "Player One has landed on a SNAKE and moved to tile 53!" << endl;
+		cout << endl;
+		playerOnePos = 53;
+		system("Pause>nul");
+		break;
+	case 64:
+		cout << "Player One has landed on a SNAKE and moved to tile 60!" << endl;
+		cout << endl;
+		playerOnePos = 60;
+		system("Pause>nul");
+		break;
+	case 71:
+		cout << "Player One has landed on a LADDER and moved to tile 91!" << endl;
+		cout << endl;
+		playerOnePos = 91;
+		system("Pause>nul");
+		break;
+	case 87:
+		cout << "Player One has landed on a SNAKE and moved to tile 24!" << endl;
+		cout << endl;
+		playerOnePos = 24;
+		system("Pause>nul");
+		break;
+	case 93:
+		cout << "Player One has landed on a SNAKE and moved to tile 73!" << endl;
+		cout << endl;
+		playerOnePos = 73;
+		system("Pause>nul");
+		break;
+	case 98:
+		cout << "Player One has landed on a SNAKE and moved to tile 78!" << endl;
+		cout << endl;
+		playerOnePos = 78;
+		system("Pause>nul");
+		break;
 	}
 
 }
@@ -217,8 +287,10 @@ void CheckPosP1() {
 void CheckPosP2() {
 
 	if (playerTwoPos >= 100) {
-		cout << "Player Two Wins! Congratz!";
-		running = false;
+		winner = "Two";
+		WinScreen();
+		Reset();
+		main();
 	}
 
 	switch (playerTwoPos) {
@@ -240,6 +312,66 @@ void CheckPosP2() {
 		playerTwoPos = 6;
 		system("Pause>nul");
 		break;
+	case 21:
+		cout << "Player Two has landed on a LADDER and moved to tile 42!" << endl;
+		cout << endl;
+		playerTwoPos = 42;
+		system("Pause>nul");
+		break;
+	case 36:
+		cout << "Player Two has landed on a LADDER and moved to tile 44!" << endl;
+		cout << endl;
+		playerTwoPos = 44;
+		system("Pause>nul");
+		break;
+	case 47:
+		cout << "Player Two has landed on a SNAKE and moved to tile 26!" << endl;
+		cout << endl;
+		playerOnePos = 26;
+		system("Pause>nul");
+		break;
+	case 51:
+		cout << "Player Two has landed on a LADDER and moved to tile 67!" << endl;
+		cout << endl;
+		playerTwoPos = 67;
+		system("Pause>nul");
+		break;
+	case 56:
+		cout << "Player Two has landed on a SNAKE and moved to tile 53!" << endl;
+		cout << endl;
+		playerTwoPos = 53;
+		system("Pause>nul");
+		break;
+	case 64:
+		cout << "Player Two has landed on a SNAKE and moved to tile 60!" << endl;
+		cout << endl;
+		playerTwoPos = 60;
+		system("Pause>nul");
+		break;
+	case 71:
+		cout << "Player Two has landed on a LADDER and moved to tile 91!" << endl;
+		cout << endl;
+		playerTwoPos = 91;
+		system("Pause>nul");
+		break;
+	case 87:
+		cout << "Player Two has landed on a SNAKE and moved to tile 24!" << endl;
+		cout << endl;
+		playerTwoPos = 24;
+		system("Pause>nul");
+		break;
+	case 93:
+		cout << "Player Two has landed on a SNAKE and moved to tile 73!" << endl;
+		cout << endl;
+		playerTwoPos = 73;
+		system("Pause>nul");
+		break;
+	case 98:
+		cout << "Player Two has landed on a SNAKE and moved to tile 78!" << endl;
+		cout << endl;
+		playerTwoPos = 78;
+		system("Pause>nul");
+		break;
 	}
 
 }
@@ -255,7 +387,9 @@ void MainBoard() {
 			board[i] = '.';
 		}
 		//replace the periods at the player positions with the players icon
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 		board[playerOnePos - 1] = 'O';
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		board[playerTwoPos - 1] = 'T';
 		//check if both players are on the same space
 		if (playerOnePos == playerTwoPos) {
@@ -263,23 +397,23 @@ void MainBoard() {
 		}
 		//display the board
 		//To add a snake/ladder to the board, write snake or laddr on top and below the tile that the event starts on, then change the # on either side to be the tile which the snake/ladder ends on
-		cout << "	#############################################################" << endl;
-		cout << "	#  " << board[99] << "  #  " << board[98] << "  #  " << board[97] << "  #  " << board[96] << "  #  " << board[95] << "  #  " << board[94] << "  #  " << board[93] << "  #  " << board[92] << "  #  " << board[91] << "  #  " << board[90] << "  #" << endl;
-		cout << "	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
-		cout << "	#  " << board[80] << "  #  " << board[81] << "  #  " << board[82] << "  #  " << board[83] << "  #  " << board[84] << "  #  " << board[85] << "  #  " << board[86] << "  #  " << board[87] << "  #  " << board[88] << "  #  " << board[89] << "  ^" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
-		cout << "	^  " << board[79] << "  #  " << board[78] << "  #  " << board[77] << "  #  " << board[76] << "  #  " << board[75] << "  #  " << board[74] << "  #  " << board[73] << "  #  " << board[72] << "  #  " << board[71] << "  #  " << board[70] << "  #" << endl;
-		cout << "	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
-		cout << "	#  " << board[60] << "  #  " << board[61] << "  #  " << board[62] << "  #  " << board[63] << "  #  " << board[64] << "  #  " << board[65] << "  #  " << board[66] << "  #  " << board[67] << "  #  " << board[68] << "  #  " << board[69] << "  ^" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
-		cout << "	^  " << board[59] << "  #  " << board[58] << "  #  " << board[57] << "  #  " << board[56] << "  #  " << board[55] << "  #  " << board[54] << "  #  " << board[53] << "  #  " << board[52] << "  #  " << board[51] << "  #  " << board[50] << "  #" << endl;
-		cout << "	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
-		cout << "	#  " << board[40] << "  #  " << board[41] << "  #  " << board[42] << "  #  " << board[43] << "  #  " << board[44] << "  #  " << board[45] << "  #  " << board[46] << "  #  " << board[47] << "  #  " << board[48] << "  #  " << board[49] << "  ^" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
-		cout << "	^  " << board[39] << "  #  " << board[38] << "  #  " << board[37] << "  #  " << board[36] << "  #  " << board[35] << "  #  " << board[34] << "  #  " << board[33] << "  #  " << board[32] << "  #  " << board[31] << "  #  " << board[30] << "  #" << endl;
-		cout << "	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Laddr<<<<<<<<<<<<<" << endl;
-		cout << "	#  " << board[20] << "  #  " << board[21] << "  #  " << board[22] << "  #  " << board[23] << "  #  " << board[24] << "  #  " << board[25] << "  #  " << board[26] << "  8  " << board[27] << "  4  " << board[28] << "  #  " << board[29] << "  ^" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>Snake>>>>>>>>>>>>>Laddr>>>>>>>>>>>>>" << endl;
+		cout << "	#############Snake#########################Snake#############" << endl;
+		cout << "	#  " << board[99] << "  #  " << board[98] << "  7  " << board[97] << "  8  " << board[96] << "  #  " << board[95] << "  #  " << board[94] << "  #  " << board[93] << "  7  " << board[92] << "  3  " << board[91] << "  #  " << board[90] << "  #" << endl;
+		cout << "	<<<<<<<<<<<<<Snake<<<<<<<<<<<<<<<<<<<Snake<Snake<<<<<<<<<<<<<" << endl;
+		cout << "	#  " << board[80] << "  #  " << board[81] << "  #  " << board[82] << "  #  " << board[83] << "  #  " << board[84] << "  #  " << board[85] << "  2  " << board[86] << "  4  " << board[87] << "  #  " << board[88] << "  #  " << board[89] << "  ^" << endl;
+		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Snake>>>>>>>>>>>>>Laddr>" << endl;
+		cout << "	^  " << board[79] << "  #  " << board[78] << "  #  " << board[77] << "  #  " << board[76] << "  #  " << board[75] << "  #  " << board[74] << "  #  " << board[73] << "  #  " << board[72] << "  #  " << board[71] << "  9  " << board[70] << "  1" << endl;
+		cout << "	<<<<<<<<<<<<<<<<<<<Snake<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Laddr<" << endl;
+		cout << "	#  " << board[60] << "  #  " << board[61] << "  #  " << board[62] << "  6  " << board[63] << "  0  " << board[64] << "  #  " << board[65] << "  #  " << board[66] << "  #  " << board[67] << "  #  " << board[68] << "  #  " << board[69] << "  ^" << endl;
+		cout << "	>>>>>>>>>>>>>>>>>>>Snake>Snake>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
+		cout << "	^  " << board[59] << "  #  " << board[58] << "  #  " << board[57] << "  #  " << board[56] << "  5  " << board[55] << "  3  " << board[54] << "  #  " << board[53] << "  #  " << board[52] << "  #  " << board[51] << "  #  " << board[50] << "  #" << endl;
+		cout << "	<<<<<<<<<<<<<<<<<<<<<<<<<Snake<<<<<<<Snake<<<<<<<<<<<<<Laddr<" << endl;
+		cout << "	#  " << board[40] << "  #  " << board[41] << "  #  " << board[42] << "  #  " << board[43] << "  #  " << board[44] << "  #  " << board[45] << "  2  " << board[46] << "  6  " << board[47] << "  #  " << board[48] << "  6  " << board[49] << "  7" << endl;
+		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>Laddr>>>>>>>Snake>>>>>>>>>>>>>Laddr>" << endl;
+		cout << "	^  " << board[39] << "  #  " << board[38] << "  #  " << board[37] << "  #  " << board[36] << "  4  " << board[35] << "  4  " << board[34] << "  #  " << board[33] << "  #  " << board[32] << "  #  " << board[31] << "  #  " << board[30] << "  #" << endl;
+		cout << "	<Laddr<<<<<<<<<<<<<<<<<<<Laddr<<<<<<<<<<<<<Laddr<<<<<<<<<<<<<" << endl;
+		cout << "	4  " << board[20] << "  2  " << board[21] << "  #  " << board[22] << "  #  " << board[23] << "  #  " << board[24] << "  #  " << board[25] << "  #  " << board[26] << "  8  " << board[27] << "  4  " << board[28] << "  #  " << board[29] << "  ^" << endl;
+		cout << "	>Laddr>>>>>>>>>>>>>>>>>>>Snake>>>>>>>>>>>>>Laddr>>>>>>>>>>>>>" << endl;
 		cout << "	^  " << board[19] << "  #  " << board[18] << "  #  " << board[17] << "  #  " << board[16] << "  0  " << board[15] << "  6  " << board[14] << "  #  " << board[13] << "  #  " << board[12] << "  #  " << board[11] << "  #  " << board[10] << "  #" << endl;
 		cout << "	<<<<<<<<<<<<<<<<<<<Laddr<Snake<<<<<<<<<<<<<<<<<<<Laddr<<<<<<<" << endl;
 		cout << "	#  " << board[0] << "  #  " << board[1] << "  #  " << board[2] << "  1  " << board[3] << "  4  " << board[4] << "  #  " << board[5] << "  #  " << board[6] << "  #  " << board[7] << "  3  " << board[8] << "  1  " << board[9] << "  ^" << endl;
@@ -304,6 +438,21 @@ void MainBoard() {
 	} while (running);
 
 } 
+
+void WinScreen() {
+	system("CLS");
+	VictoryText();
+	cout << endl << endl << endl;
+	cout << "\t\t\t\t\t\tPlayer " << winner << " Is The Winner!";
+}
+
+void Reset() {
+	valid = false;
+	running = false;
+	playerOnePos = 1;
+	playerTwoPos = 1;
+	turnCounter = 1;
+}
 
 
 #pragma region Menu Word Art
@@ -350,7 +499,6 @@ void MenuToggle()
 	cout << "\t\t\t\t\t\t       2. Rules" << endl;
 	cout << "\t\t\t\t\t\t       3. Quit" << endl;
 }
-
 #pragma endregion
 
 #pragma region Snake Art
@@ -398,5 +546,20 @@ void SnakesText() {
 	cout << "                                | |      |  ____  | | |  | | | |  | | |  __|  |    _/   _ \\ \\        \n";
 	cout << "                                | |____  | |    | | | |_/ /  | |_/ /  | |___  | |\\ \\   | \\/  |              \n";
 	cout << "                                |______| |_|    |_| |____/   |____/   |_____| |_| \\_\\   \\___/                \n";
+
+}
+
+void VictoryText() {
+	//ART
+	cout << endl;
+	cout << "\t __" << "              __" << "   ___________" << "     ______" << "    ___________" << "     ______" << "      _______" << "    __        __ " << endl;
+	cout << "\t \\ \\" << "            / /" << "  |____   ____|" << "   / ____ \\" << "  |____   ____|" << "   /  __  \\" << "    |  ____ \\" << "   \\ \\      / /" << endl;
+	cout << "\t  \\ \\" << "          / /" << "        | |" << "       / /    \\ \\" << "      | |" << "       /  /  \\  \\" << "   | |    \\ \\" << "   \\ \\    / /" << endl;
+	cout << "\t   \\ \\" << "        / /" << "         | |" << "      | |      |_|" << "     | |" << "      |  /    \\  |" << "  | |    | |" << "    \\ \\  / /" << endl;
+	cout << "\t    \\ \\" << "      / /" << "          | |" << "      | |" << "              | |" << "      | |      | |" << "  | |____/ /" << "     \\ \\/ / " << endl;
+	cout << "\t     \\ \\" << "    / /" << "           | |" << "      | |       _" << "      | |" << "      | |      | |" << "  |  _  __/" << "       \\  /" << endl;
+	cout << "\t      \\ \\" << "  / /" << "            | |" << "      | |      | |" << "     | |" << "      |  \\    /  |" << "  | | \\ \\" << "         |  | " << endl;
+	cout << "\t       \\ \\" << "/ /" << "         ____| |____" << "   \\ \\____/ /" << "      | |" << "       \\  \\__/  /" << "   | |  \\ \\" << "        |  | " << endl;
+	cout << "\t        \\" << "__/" << "         |___________|" << "   \\______/" << "       |_|" << "        \\______/" << "    |_|   \\_\\" << "       |__|" << endl;
 
 }
