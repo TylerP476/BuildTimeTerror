@@ -3,6 +3,7 @@
 #include<cstdlib>
 #include<stdlib.h>
 #include "windows.h"
+#include<string>
 using namespace std;
 //Variables for game
 bool running = true;
@@ -30,6 +31,8 @@ void SnakesText();
 void Reset();
 void WinScreen();
 void VictoryText();
+void printLaddr();
+
 
 
 
@@ -159,6 +162,16 @@ int main()
 	system("pause>nul");
 	return 0;
 }
+void printLaddr() {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	cout << "Laddr";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+}
+void printSnake() {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+	cout << "Snake";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+}
 //Function that runs everytime the player takes a turn
 void TakeTurnP1() {
 	srand(time(NULL));
@@ -193,7 +206,7 @@ void TakeTurnP2() {
 //Function that checks if the player is on a snake or ladder or has won
 void CheckPosP1() {
 	//Check if the player won
-	if (playerOnePos >= 100) {
+	if (playerOnePos >= 5) {
 		winner = "One";//Variable for denoting who the winner is in end screen
 		WinScreen();
 		Reset();
@@ -389,35 +402,36 @@ void MainBoard() {
 		//replace the periods at the player positions with the players icon
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 		board[playerOnePos - 1] = 'O';
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+		
 		board[playerTwoPos - 1] = 'T';
 		//check if both players are on the same space
 		if (playerOnePos == playerTwoPos) {
 			board[playerOnePos - 1] = 'B';
 		}
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		//display the board
 		//To add a snake/ladder to the board, write snake or laddr on top and below the tile that the event starts on, then change the # on either side to be the tile which the snake/ladder ends on
-		cout << "	#############Snake#########################Snake#############" << endl;
+		cout << "	#############"; printSnake(); cout << "#########################"; printSnake(); cout << "#############" << endl;
 		cout << "	#  " << board[99] << "  #  " << board[98] << "  7  " << board[97] << "  8  " << board[96] << "  #  " << board[95] << "  #  " << board[94] << "  #  " << board[93] << "  7  " << board[92] << "  3  " << board[91] << "  #  " << board[90] << "  #" << endl;
-		cout << "	<<<<<<<<<<<<<Snake<<<<<<<<<<<<<<<<<<<Snake<Snake<<<<<<<<<<<<<" << endl;
+		cout << "	<<<<<<<<<<<<<"; printSnake(); cout << "<<<<<<<<<<<<<<<<<<<"; printSnake(); cout << "<"; printSnake(); cout << "<<<<<<<<<<<<<" << endl;
 		cout << "	#  " << board[80] << "  #  " << board[81] << "  #  " << board[82] << "  #  " << board[83] << "  #  " << board[84] << "  #  " << board[85] << "  2  " << board[86] << "  4  " << board[87] << "  #  " << board[88] << "  #  " << board[89] << "  ^" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Snake>>>>>>>>>>>>>Laddr>" << endl;
+		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; printSnake(); cout << ">>>>>>>>>>>>>"; printLaddr(); cout << ">" << endl;
 		cout << "	^  " << board[79] << "  #  " << board[78] << "  #  " << board[77] << "  #  " << board[76] << "  #  " << board[75] << "  #  " << board[74] << "  #  " << board[73] << "  #  " << board[72] << "  #  " << board[71] << "  9  " << board[70] << "  1" << endl;
-		cout << "	<<<<<<<<<<<<<<<<<<<Snake<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Laddr<" << endl;
+		cout << "	<<<<<<<<<<<<<<<<<<<"; printSnake(); cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"; printLaddr(); cout << "<" << endl;
 		cout << "	#  " << board[60] << "  #  " << board[61] << "  #  " << board[62] << "  6  " << board[63] << "  0  " << board[64] << "  #  " << board[65] << "  #  " << board[66] << "  #  " << board[67] << "  #  " << board[68] << "  #  " << board[69] << "  ^" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>Snake>Snake>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
+		cout << "	>>>>>>>>>>>>>>>>>>>"; printSnake(); cout << ">"; printSnake(); cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
 		cout << "	^  " << board[59] << "  #  " << board[58] << "  #  " << board[57] << "  #  " << board[56] << "  5  " << board[55] << "  3  " << board[54] << "  #  " << board[53] << "  #  " << board[52] << "  #  " << board[51] << "  #  " << board[50] << "  #" << endl;
-		cout << "	<<<<<<<<<<<<<<<<<<<<<<<<<Snake<<<<<<<Snake<<<<<<<<<<<<<Laddr<" << endl;
+		cout << "	<<<<<<<<<<<<<<<<<<<<<<<<<"; printSnake(); cout << "<<<<<<<"; printSnake(); cout << "<<<<<<<<<<<<<"; printLaddr(); cout << "<" << endl;
 		cout << "	#  " << board[40] << "  #  " << board[41] << "  #  " << board[42] << "  #  " << board[43] << "  #  " << board[44] << "  #  " << board[45] << "  2  " << board[46] << "  6  " << board[47] << "  #  " << board[48] << "  6  " << board[49] << "  7" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>Laddr>>>>>>>Snake>>>>>>>>>>>>>Laddr>" << endl;
+		cout << "	>>>>>>>>>>>>>>>>>>>>>>>>>"; printLaddr(); cout << ">>>>>>>"; printSnake(); cout << ">>>>>>>>>>>>>"; printLaddr(); cout << ">" << endl;
 		cout << "	^  " << board[39] << "  #  " << board[38] << "  #  " << board[37] << "  #  " << board[36] << "  4  " << board[35] << "  4  " << board[34] << "  #  " << board[33] << "  #  " << board[32] << "  #  " << board[31] << "  #  " << board[30] << "  #" << endl;
-		cout << "	<Laddr<<<<<<<<<<<<<<<<<<<Laddr<<<<<<<<<<<<<Laddr<<<<<<<<<<<<<" << endl;
+		cout << "	<"; printLaddr(); cout << "<<<<<<<<<<<<<<<<<<<"; printLaddr(); cout << "<<<<<<<<<<<<<"; printLaddr(); cout << "<<<<<<<<<<<<<" << endl;
 		cout << "	4  " << board[20] << "  2  " << board[21] << "  #  " << board[22] << "  #  " << board[23] << "  #  " << board[24] << "  #  " << board[25] << "  #  " << board[26] << "  8  " << board[27] << "  4  " << board[28] << "  #  " << board[29] << "  ^" << endl;
-		cout << "	>Laddr>>>>>>>>>>>>>>>>>>>Snake>>>>>>>>>>>>>Laddr>>>>>>>>>>>>>" << endl;
+		cout << "	>"; printLaddr(); cout << ">>>>>>>>>>>>>>>>>>>"; printSnake(); cout << ">>>>>>>>>>>>>"; printLaddr(); cout << ">>>>>>>>>>>>>" << endl;
 		cout << "	^  " << board[19] << "  #  " << board[18] << "  #  " << board[17] << "  #  " << board[16] << "  0  " << board[15] << "  6  " << board[14] << "  #  " << board[13] << "  #  " << board[12] << "  #  " << board[11] << "  #  " << board[10] << "  #" << endl;
-		cout << "	<<<<<<<<<<<<<<<<<<<Laddr<Snake<<<<<<<<<<<<<<<<<<<Laddr<<<<<<<" << endl;
+		cout << "	<<<<<<<<<<<<<<<<<<<"; printLaddr(); cout << "<"; printSnake(); cout << "<<<<<<<<<<<<<<<<<<<"; printLaddr(); cout << "<<<<<<<" << endl;
 		cout << "	#  " << board[0] << "  #  " << board[1] << "  #  " << board[2] << "  1  " << board[3] << "  4  " << board[4] << "  #  " << board[5] << "  #  " << board[6] << "  #  " << board[7] << "  3  " << board[8] << "  1  " << board[9] << "  ^" << endl;
-		cout << "	>>>>>>>>>>>>>>>>>>>Laddr>>>>>>>>>>>>>>>>>>>>>>>>>Laddr>>>>>>>" << endl << endl;
+		cout << "	>>>>>>>>>>>>>>>>>>>"; printLaddr(); cout << ">>>>>>>>>>>>>>>>>>>>>>>>>"; printLaddr(); cout << ">>>>>>>" << endl << endl;
 		//info that is displayed under board (Can be declared in rules)
 		cout << "\t\t\tPlayer One: " << playerOnePos << " Character O." << endl;
 		cout << "\t\t\tPlayer Two: " << playerTwoPos << " Character T." << endl;
@@ -444,6 +458,7 @@ void WinScreen() {
 	VictoryText();
 	cout << endl << endl << endl;
 	cout << "\t\t\t\t\t\tPlayer " << winner << " Is The Winner!";
+	cout << "\n  \t\t\t\t\t\tPress ENTER to continue";
 }
 
 void Reset() {
@@ -451,7 +466,7 @@ void Reset() {
 	running = false;
 	playerOnePos = 1;
 	playerTwoPos = 1;
-	turnCounter = 1;
+	turnCounter = 0;
 }
 
 
